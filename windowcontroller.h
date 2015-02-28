@@ -15,6 +15,8 @@ class WindowController : public QWidget
 public:
     WindowController(QWidget* parent = 0);
 
+
+
     void mousePressEvent(QMouseEvent*) { currentType = static_cast<WindowsLayout>(currentType + 1); setType(currentType);}
     void setType(WindowsLayout);
     //void addWindow(QWidget*, int);
