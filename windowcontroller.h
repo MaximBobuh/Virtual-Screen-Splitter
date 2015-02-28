@@ -8,7 +8,7 @@
 enum WindowsLayout {VDOUBLE, HDOUBLE, VTRIPLE,  LTRIPLE, RTRIPLE, TTRIPLE, BTRIPLE, QUAD };
 
 
-
+//Main class for control the placement of windows
 class WindowController : public QWidget
 {
     Q_OBJECT
