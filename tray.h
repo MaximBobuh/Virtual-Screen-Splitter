@@ -1,9 +1,11 @@
 #ifndef TRAY_H
 #define TRAY_H
-#include <QLabel>
 #include <QMenu>
 #include <QSystemTrayIcon>
 #include "windowcontroller.h"
+#include "settingswidget.h"
+
+//Widget for control features the virtual desktop
 
 class Tray : public QObject
 {
@@ -17,13 +19,13 @@ protected:
 
 protected slots:
     void slotSettings();
-    void slotAbout(){}
     void slotShowHide();
 
 private:
     QMenu* menu;
     QSystemTrayIcon* trayIcon;
-    WindowController* controller;
+    WindowController controller;
+    SettingsWidget settings;
 };
 
 #endif // TRAY_H

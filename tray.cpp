@@ -2,9 +2,9 @@
 #include <QApplication>
 
 Tray::Tray()
-{
-    controller = new WindowController;
-    controller->show();
+{    
+    connect(&settings, SIGNAL(signalApply(WindowsLayout, const WindowInfo*)), &controller,
+            SLOT(slotApply(WindowsLayout, const WindowInfo*)));
     createMenu();
 }
 
@@ -19,16 +19,12 @@ void Tray::createMenu()
     QAction* Setting = new QAction("Setting", this);
     connect(Setting, SIGNAL(triggered()), SLOT(slotSettings()));
 
-    QAction* About = new QAction("About", this);
-    connect(About, SIGNAL(triggered()), SLOT(slotAbout()));
-
     QAction* Quit   = new QAction("Quit", this);
     connect(Quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     menu = new QMenu;
     menu->addAction(Show);
     menu->addAction(Setting);
-    menu->addAction(About);
     menu->addAction(Quit);
 
     trayIcon = new QSystemTrayIcon(this);
@@ -44,7 +40,7 @@ void Tray::createMenu()
 
 void Tray::slotShowHide()
 {
-    controller->setVisible(!controller->isVisible());
+    controller.showHide();
 }
 
 //=====================================================
@@ -52,7 +48,8 @@ void Tray::slotShowHide()
 
 void Tray::slotSettings()
 {
-
+    settings.loadWindowList();
+    settings.setVisible(true);
 }
 
 

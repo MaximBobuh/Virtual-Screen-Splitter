@@ -2,10 +2,12 @@
 #define WINDOWCONTROLLER_H
 
 #include <QWidget>
+#include <QLabel>
 #include <QBoxLayout>
 #include <QMouseEvent>
+#include <WindowInfo.h>
+#include "WidgetWindow.h"
 
-enum WindowsLayout {VDOUBLE, HDOUBLE, VTRIPLE,  LTRIPLE, RTRIPLE, TTRIPLE, BTRIPLE, QUAD };
 
 
 //Main class for control the placement of windows
@@ -15,15 +17,19 @@ class WindowController : public QWidget
 public:
     WindowController(QWidget* parent = 0);
 
-
-
-    void mousePressEvent(QMouseEvent*) { currentType = static_cast<WindowsLayout>(currentType + 1); setType(currentType);}
     void setType(WindowsLayout);
-    //void addWindow(QWidget*, int);
+    void showHide();
+
+    void paintEvent(QPaintEvent*);
+
+
+public slots:
+    void slotApply(WindowsLayout, const WindowInfo*);
 
 private:
-    QVector<QWidget*> windows;
+    QVector<WidgetWindow*> windows;
     WindowsLayout currentType;
+    int size;
 };
 
 #endif // WINDOWCONTROLLER_H
